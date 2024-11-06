@@ -1,16 +1,17 @@
 import {inject, Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContentAdminService {
+export class PaymentService {
   private url = environment.apiUrl
   private http: HttpClient = inject(HttpClient);
   constructor() { }
   list():Observable<any>{
-    return this.http.get(this.url + "/contents");
+    return this.http.get(this.url + "/histories");
   }
+
 }
