@@ -6,7 +6,7 @@ import {environment} from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class QuizUserService {
+export class QuizService {
   private url = environment.apiUrl
   private http: HttpClient = inject(HttpClient);
 
@@ -19,6 +19,9 @@ export class QuizUserService {
   }
   insert(userId : number): Observable<any>{
     return this.http.post(this.url + "/quiz/"+ userId ,{});
+  }
+  listQuizzesByUser(userId: number):Observable<any>{
+    return this.http.get(this.url + "/quizzes/"+ userId);
   }
 
 
