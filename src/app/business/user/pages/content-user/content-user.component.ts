@@ -57,8 +57,8 @@ export class ContentUserComponent implements OnInit{
   type: string | undefined;
   theme: string | undefined;
   contentService: ContentService = inject(ContentService);
-  //ratingService: RatingService= inject(RatingService);
-  //userContentService: ContentHistoryService = inject(ContentHistoryService);
+  ratingService: RatingService= inject(RatingService);
+  userContentService: ContentHistoryService = inject(ContentHistoryService);
   isDateAsc = true;
   userId = 2;
 
@@ -113,7 +113,7 @@ export class ContentUserComponent implements OnInit{
     }
     this.isDateAsc = !this.isDateAsc;
   }
-/*
+
   onPopularity() {
     this.ratingService.listContentOrderByScore().subscribe({
       next: (data) => {
@@ -121,7 +121,7 @@ export class ContentUserComponent implements OnInit{
       },
       error: (error) => console.log("Error en consulta de popularidad", error),
     });
-  }*/
+  }
 
   resetOrder() {
     this.contentService.list().subscribe({
