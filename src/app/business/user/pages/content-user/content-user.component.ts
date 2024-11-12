@@ -18,9 +18,10 @@ import {Content} from '../../../../core/model/content';
 import {ContentService} from '../../../../core/services/content.service';
 import {Observable} from 'rxjs';
 import {data} from 'autoprefixer';
-//import {RatingService} from '../../../../core/services/rating.service';
-//import {ContentHistoryService} from '../../../../core/services/content-history.service';
-//import {UserContent} from '../../../../core/model/user-content';
+import {RatingService} from '../../../../core/services/rating.service';
+import {ContentHistoryService} from '../../../../core/services/content-history.service';
+import {UserContent} from '../../../../core/model/user-content';
+
 
 
 @Component({

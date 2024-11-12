@@ -1,12 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-*{
-    margin: 0;
-    padding: 0;
+html, body { height: 100%; }
+body { margin: 0;  background-color: #E6E0D1; }
+
+/* Color Variables */
+:root {
+  --t-blue: #276A9D;
+  --t-white: #E6E0D1;
+  --t-platinum: #D9D9D9;
+  --t-wine: #531F33;
+  --t-rose: #E7337D;
 }
 
+/* Font Settings */
+h1 {
+  font-family: 'COCOGOOSE', sans-serif;
+  font-weight: lighter;
+  margin: 0;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+h2, h3, h4, h5, h6, p, span, a, li, label, input, button, div {
+  font-family: 'Gill Sans MT', sans-serif;
+  margin: 0;
+
+}
+.header{
+  font-weight: lighter;
+}

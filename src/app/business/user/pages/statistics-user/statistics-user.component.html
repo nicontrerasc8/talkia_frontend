@@ -1,57 +1,31 @@
-
+<app-nav-user></app-nav-user>
 <div class="container">
-  <app-nav-user></app-nav-user>
-  <div class="plot">
-    <div class="icon-description">
-      <button [routerLink]="['/user']" class="back-button">&larr;</button>
-      <h2>Desempeño por Cuestionario</h2>
+  <button class="back-button" routerLink="/user">&larr;</button>
+  <h2>Desempeño General</h2>
+
+  <div class="statistics">
+    <!-- Gráfico a la izquierda -->
+    <div class="chart-container">
+      <p>Porcentaje de respuestas correctas</p>
+      <canvas id="Chart1"></canvas>
     </div>
-    <div class="results">
-      <div class="list-quiz">
-        <div class="quiz" *ngFor="let q of quizzes">
-          <mat-card class="f-description" appearance="outlined">
-            <mat-card-content>
-              <h2>Cuestionario {{quizzes.indexOf(q) +1}}</h2>
-              <li>Fecha: {{q.iCreatedAt}}</li>
-              <li>Hora: {{q.iCreatedAt}} </li>
-              <button (click)="onDetails(q.id)" >Ver detalles</button>
-            </mat-card-content>
-          </mat-card>
-        </div>
+
+    <!-- Textos a la derecha -->
+    <div class="text-stats">
+      <div class="stat-item">
+        <p>Promedio de respuestas correctas</p>
+        <p class="stat-value">{{ percentageCorrectAnswers }}</p>
       </div>
-      <div class="statistics-quiz">
-        <div class="summary-1">
-          <div class="chart">
-            <p>Porcentaje de respuestas correctas</p>
-            <canvas id="Chart1">{{ chart }}</canvas>
-          </div>
-          <div class="info">
-            <div class="info-text">
-              <p>Cantidad de respuestas correctas</p>
-              <p>{{countCorrectAnswers}}</p>
-            </div>
-            <div class="info-text">
-              <p>Respuestas correctas en el segundo intento</p>
-              <p>{{countSecondAttempt}}</p>
-            </div>
-          </div>
-        </div>
-        <p class="summary-2-title">Resumen de preguntas:</p>
-        <div class="summary-2">
-          <div *ngFor="let qq of questionDetails" class="question">
-            <mat-card class="f-description" appearance="outlined">
-              <mat-card-content>
-                <li>Pregunta {{questionDetails.indexOf(qq)+1}} {{qq.is_correct}}</li>
-                <li>{{qq.question.description}}</li>
-                <li>Correct Answer:</li>
-                <li>Feedback:</li>
-                <li>Número de intentos: {{qq.attempt}}</li>
-              </mat-card-content>
-            </mat-card>
-          </div>
-        </div>
+      <div class="stat-item">
+        <p>Cantidad de cuestionarios resueltos totales</p>
+        <p class="stat-value">{{ quizzesCompleted }}</p>
+      </div>
+      <div class="stat-item">
+        <p>Promedio de puntos obtenidos por Quiz</p>
+        <p class="stat-value">{{ avgPoints }}</p>
       </div>
     </div>
   </div>
+  <button [routerLink]="['statistics-quiz-user']" class="view-performance-button">Ver Desempeño por Cuestionario</button>
+
 </div>
-<router-outlet/>
