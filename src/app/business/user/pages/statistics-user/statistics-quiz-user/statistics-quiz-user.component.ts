@@ -7,7 +7,7 @@ import { MatCard, MatCardContent, MatCardImage } from '@angular/material/card';
 
 import { UsersService } from '../../../../../core/services/users.service';
 import { QuizzesQuestionService } from '../../../../../core/services/quizzes-question.service';
-import { QuizUserService } from '../../../../../core/services/quiz-user.service';
+import { QuizService } from '../../../../../core/services/quiz.service';
 import { AnswerService } from '../../../../../core/services/answer.service';
 import { QuizzesQuestion } from '../../../../../core/model/quizzes-question';
 import { Chart, registerables } from 'chart.js';
@@ -66,7 +66,7 @@ export class StatisticsQuizUserComponent implements OnInit {
   countSecondAttempt: number;
   userService: UsersService = inject(UsersService);
   qqService: QuizzesQuestionService = inject(QuizzesQuestionService);
-  quizService: QuizUserService = inject(QuizUserService);
+  quizService: QuizService = inject(QuizService);
   answerService: AnswerService = inject(AnswerService);
 
   ngOnInit() {

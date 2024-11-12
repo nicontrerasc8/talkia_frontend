@@ -43,4 +43,20 @@ export class QuizzesQuestionService {
     return this.http.get(this.url + "/quizzesQuestion/listQuizzesQuestionByQuizId/" + quizId, {});
   }
 
+  getAvgCorrectPerUser(userId: number): Observable<any>{
+    return this.http.get(this.url + "/quizzesQuestion/correctAnswerPercentage/" + userId, {});
+  }
+
+  getAvgPointsPerUser(userId: number): Observable<any>{
+    return this.http.get(this.url + "/quizzesQuestion/getAvgCorrectAnswers/" + userId, {});
+  }
+
+  getCompletedPerUser(userId: number): Observable<any>{
+    return this.http.get(this.url + "/quizzesQuestion/listTotalQuizzesCompleted/" + userId, {});
+  }
+
+  getPercentagePerUser(userId: number): Observable<any>{
+    return this.http.get(this.url + "/quizzesQuestion/getPercentageCorrectAnswersUser/" + userId, {});
+  }
+
 }
