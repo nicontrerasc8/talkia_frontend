@@ -5,11 +5,14 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Router} from '@angular/router';
 import {QuizService} from '../../../../../core/services/quiz.service';
+import {NavAdminComponent} from '../../../shared/nav-admin/nav-admin.component';
 
 @Component({
   selector: 'app-quiz-management',
   standalone: true,
-  imports: [],
+  imports: [
+    NavAdminComponent
+  ],
   templateUrl: './quiz-management.component.html',
   styleUrl: './quiz-management.component.css'
 })
