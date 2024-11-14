@@ -46,10 +46,8 @@ export class QuizzesQuestionComponent implements OnInit{
 
   router: Router = inject(Router);
   fb: FormBuilder = inject(FormBuilder);
-  route: ActivatedRoute = inject(ActivatedRoute);
   answerService: AnswerService = inject(AnswerService);
   qqService: QuizzesQuestionService = inject(QuizzesQuestionService);
-  questionService: QuestionService = inject(QuestionService);
   dataSharing: DataQuizzesSharingService = inject(DataQuizzesSharingService);
   public userAnswer: string = '';
   submitAnswer: boolean = false;
@@ -60,10 +58,9 @@ export class QuizzesQuestionComponent implements OnInit{
   totalPoints: number = 0;
   pointsBylevel: number[] = [];
 
-  lista: QuestionsByQuiz[] = [];  // Lista de preguntas
-  answersMap: { [key: number]: any[] } = {};  // Mapa de respuestas por ID de pregunta
+  lista: QuestionsByQuiz[] = [];
+  answersMap: { [key: number]: any[] } = {};
 
-  // Grupos de formularios para cada paso
   formGroups: FormGroup[] = [
     this.fb.group({ answer0: ['', Validators.required] }),
     this.fb.group({ answer1: ['', Validators.required] }),
@@ -122,20 +119,21 @@ export class QuizzesQuestionComponent implements OnInit{
       if (!response.message.includes('Incorrect') && !response.message.includes('intentos')) {
         console.log("Correcto");
         this.correctAnswer = true;
+
         if(this.attemps == 1){
-          //this.points.push(20);
           this.points.push(this.pointsBylevel[this.levelId-1]);
           this.totalPoints += this.pointsBylevel[this.levelId-1];
           console.log(this.pointsBylevel[this.levelId-1]);
         }
         else{
-          //this.points.push(10);
           this.points.push(this.pointsBylevel[this.levelId-1]/2);
           this.totalPoints += this.pointsBylevel[this.levelId-1]/2;
           console.log(this.pointsBylevel[this.levelId-1]/2)
         }
+
         this.attemps = 0;
         stepper.next();
+
       } else {
         console.log("Incorrecto");
         this.correctAnswer = false
@@ -150,7 +148,7 @@ export class QuizzesQuestionComponent implements OnInit{
     });
   }
 
-  nextQuestion(message:string): void {
+  nextQuestion(): void {
     this.submitAnswer = false;
     this.correctAnswer = false;
     this.attemps = 0;

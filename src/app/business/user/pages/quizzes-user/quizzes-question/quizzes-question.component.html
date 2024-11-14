@@ -33,9 +33,9 @@
   <div class="response-container" *ngIf="submitAnswer">
     <h1>{{ correctAnswer ? '¡Respuesta correcta!' : '¡Respuesta incorrecta!' }}</h1>
     <img src="assets/logo.png" alt="">
-    <button *ngIf="correctAnswer" (click)="nextQuestion(messageDialog)">Siguiente pregunta</button>
+    <button *ngIf="correctAnswer" (click)="nextQuestion()">Siguiente pregunta</button>
     <button *ngIf="!correctAnswer && attemps < 2" (click)="submitAnswer = false">Intentar de nuevo</button>
-    <button *ngIf="!correctAnswer && attemps == 2" (click)="nextQuestion(messageDialog)">Siguiente pregunta</button>
+    <button *ngIf="!correctAnswer && attemps == 2" (click)="nextQuestion()">Siguiente pregunta</button>
     <img src="assets/img/correct.png" alt="" *ngIf="correctAnswer">
     <img src="assets/img/incorrect.png" alt="" *ngIf="!correctAnswer">
     <p>{{messageDialog}}</p>
