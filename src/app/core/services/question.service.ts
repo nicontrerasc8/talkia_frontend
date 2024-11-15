@@ -41,7 +41,6 @@ export class QuestionService {
     return this.http.get<Question[]>(this.url + "/questions/description/" + description);
   }
 
-
   getList():Observable<Question[]>{
     return this.listaCambio.asObservable();
   }
