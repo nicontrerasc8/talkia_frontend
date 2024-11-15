@@ -12,7 +12,7 @@
 
 h1 {
   font-size: 24px;
-  color: #531F33;
+  color: var(--t-wine);
   margin-bottom: 10px;
 
 }

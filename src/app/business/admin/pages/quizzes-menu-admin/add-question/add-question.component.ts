@@ -10,13 +10,12 @@ import {
   FormControl
 } from '@angular/forms';
 import {NavAdminComponent} from '../../../shared/nav-admin/nav-admin.component';
-import {Answer} from '../../../../../core/model/answer';
 import {NgForOf, NgIf} from '@angular/common';
 import {Question} from '../../../../../core/model/question';
-import {QuestionAdminService} from '../../../../../core/services/question-admin.service';
 import {LevelService} from '../../../../../core/services/level.service';
 import {Level} from '../../../../../core/model/level';
 import {AnswerService} from '../../../../../core/services/answer.service';
+import {QuestionService} from '../../../../../core/services/question.service';
 
 @Component({
   selector: 'app-add-question',
@@ -39,7 +38,7 @@ export class AddQuestionComponent {
   level: Level = new Level();
   fb: FormBuilder = inject(FormBuilder);
   router: Router = inject(Router);
-  questionAdminService: QuestionAdminService = inject(QuestionAdminService);
+  questionService: QuestionService = inject(QuestionService);
   levelService: LevelService = inject(LevelService);
   answerService: AnswerService = inject(AnswerService);
 
@@ -62,6 +61,7 @@ export class AddQuestionComponent {
   get answers(): FormArray {
     return this.datosForm.get('answers') as FormArray;
   }
+
 
   addAnswer() {
     const answerGroup = this.fb.group({
@@ -120,12 +120,12 @@ export class AddQuestionComponent {
         console.log(question.feedback);
         console.log(question.description);
 
-        this.questionAdminService.insert(question).subscribe((data: Object): void => {
-          this.questionAdminService.list().subscribe((data: any) => {
+        this.questionService.insert(question).subscribe((data: Object): void => {
+          this.questionService.list().subscribe((data: any) => {
             console.log("Lista actualizada de preguntas:", data);
-            this.questionAdminService.setList(data);
+            this.questionService.setList(data);
 
-            this.questionAdminService.getQuestionByDescription(question.description).subscribe((questionGet: Question) => {
+            this.questionService.getQuestionByDescription(question.description).subscribe((questionGet: Question) => {
               const q = questionGet;
 
               // Accedemos al FormArray de respuestas correctamente
@@ -144,9 +144,9 @@ export class AddQuestionComponent {
               });
 
               // Después de insertar todas las respuestas, actualizamos la lista de preguntas y redirigimos
-              this.questionAdminService.list().subscribe((data: any) => {
+              this.questionService.list().subscribe((data: any) => {
                 console.log("Lista actualizada de preguntas:", data);
-                this.questionAdminService.setList(data);
+                this.questionService.setList(data);
               });
 
                 this.router.navigate(['admin/quizzes/list-questions']);
