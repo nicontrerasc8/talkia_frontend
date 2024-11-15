@@ -3,7 +3,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Quiz} from '../../../../../core/model/quiz';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import {Router} from '@angular/router';
+import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {QuizService} from '../../../../../core/services/quiz.service';
 import {NavAdminComponent} from '../../../shared/nav-admin/nav-admin.component';
 
@@ -11,7 +11,9 @@ import {NavAdminComponent} from '../../../shared/nav-admin/nav-admin.component';
   selector: 'app-quiz-management',
   standalone: true,
   imports: [
-    NavAdminComponent
+    NavAdminComponent,
+    RouterLink,
+    RouterOutlet
   ],
   templateUrl: './quiz-management.component.html',
   styleUrl: './quiz-management.component.css'
