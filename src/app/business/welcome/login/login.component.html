@@ -1,0 +1,38 @@
+<div class="menu-container">
+    <div class="left">
+      <img src="assets/logo.png" alt="Logo de TALKIA" class="logo">
+      <h1 class="logo-text">TALKIA</h1>
+    </div>
+
+    <div class="right">
+      <h1 class="welcome-text">¡Bienvenido a TALKIA!</h1>
+        <form class="form">
+          <div>
+            <input
+              class="form-input"
+              id="usuario"
+              type="text"
+              placeholder="Usuario"
+              required
+            />
+          </div>
+
+          <div>
+            <input
+              class="form-input"
+              id="contrasena"
+              type="password"
+              placeholder="Contraseña"
+              required
+            />
+          </div>
+
+          <button [routerLink]="'/user'"
+                  class="btn-aceptar">
+            Aceptar
+          </button>
+        </form>
+    </div>
+</div>
+
+<router-outlet />

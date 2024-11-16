@@ -1,11 +1,6 @@
 import {Routes } from '@angular/router';
 import {LandingComponent} from './business/landing/landing.component';
-import {HomeComponent} from './home/home.component';
-import {ContentAdminComponent} from './home/pages/content-admin/content-admin.component';
-
-import UsersComponent from './home/pages/users/users.component';
-import { PaymentAdminComponent } from './home/pages/payment-admin/payment-admin.component';
-import { LoginComponent } from './login/login.component';
+import {LoginComponent} from './business/welcome/login/login.component';
 
 export const routes: Routes = [
   {
@@ -17,7 +12,7 @@ export const routes: Routes = [
   {
     path: 'home',
     children: [
-      { path: '', component: HomeComponent },
+      { path: '', component:  },
       { path: 'users', component: UsersComponent },
       { path: 'contents', component: ContentAdminComponent },
       { path: 'histories', component: PaymentAdminComponent },
