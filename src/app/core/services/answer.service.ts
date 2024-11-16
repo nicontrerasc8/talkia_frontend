@@ -19,9 +19,6 @@ export class AnswerService {
   insert(answer:Answer): Observable<any>{
     return this.http.post(this.url + "/answer", answer);
   }
-  getCorrectAnswerByQuestionId(questionId: number):Observable<any>{
-    return this.http.get(this.url + "/correctAnswerByQuestionId/"+ questionId, {});
-  }
   delete(id:number): Observable<any>{
     return this.http.delete(this.url + "/answer/" + id);
   }

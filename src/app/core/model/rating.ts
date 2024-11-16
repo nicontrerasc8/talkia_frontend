@@ -1,10 +1,10 @@
 import {User} from './user';
 import {Content} from './content';
 
-export class UserContent {
+export class Rating {
   id: number;
-  name: string;
-  iViewedAt: Date = new Date();
+  iRatedAt: Date;
+  score: number;
   user: User;
-  content: Content;
+  content:Content;
 }

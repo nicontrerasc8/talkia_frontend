@@ -14,4 +14,12 @@ export class PaymentService {
     return this.http.get(this.url + "/histories");
   }
 
+  listTotalAmountBySubType(startDate: string, endDate: string): Observable<any>{
+    return this.http.get(this.url + "/listTotalAmountBySubType/" + startDate +"/"+ endDate);
+  }
+
+  countHistoriesByPaymentType(startDate: string, endDate: string): Observable<any>{
+    return this.http.get(this.url + "/countHistoriesByPaymentType/" + startDate +"/"+ endDate);
+  }
+
 }

@@ -1,3 +1,5 @@
+import {Level} from './level';
+
 export class User {
   id: number;
   userName: string;
@@ -8,5 +10,5 @@ export class User {
   totalPoints: number;
   iCreatedAt: Date = new Date();
   iModifiedAt: Date = new Date();
-
+  level: Level;
 }

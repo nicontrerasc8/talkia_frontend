@@ -21,7 +21,7 @@ export class TrackingUserComponent implements OnInit{
   points: number = 0;
   rocketPosition: number = 0;
   userService: UsersService = inject(UsersService);
-  userId: number = 6;//parseInt(localStorage.getItem('userId') || '0', 10);
+  userId: number = 10;//parseInt(localStorage.getItem('userId') || '0', 10);
   userLevelId: number = 1; //parseInt(localStorage.getItem('levelId') || '0', 10);
   onTrack: number = parseInt(localStorage.getItem('onTrack') || '0', 10);
 

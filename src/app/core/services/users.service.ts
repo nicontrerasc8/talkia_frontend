@@ -8,11 +8,14 @@ import {User} from '../model/user';
   providedIn: 'root'
 })
 export class UsersService {
-  private url = environment.apiUrl
+
+  private url = environment.apiUrl;
   private http: HttpClient = inject(HttpClient);
   private listaCambio: Subject<User[]> = new Subject<User[]>();
 
-  constructor() {}
+  constructor() {
+  }
+
   list(): Observable<any> {
     return this.http.get(this.url + "/users");
   }
@@ -26,6 +29,10 @@ export class UsersService {
 
   listId(id: number): Observable<any> {
     return this.http.get(this.url + "/user/" + id);
+  }
+
+  existUsername(userName: String): Observable<any>{
+    return this.http.get(this.url+ "/users_exist/" + userName, {})
   }
 
   insert(user: User): Observable<any> {
@@ -59,9 +66,5 @@ export class UsersService {
 
   getStatusByUser(userId: number): Observable<any>{
     return this.http.get(this.url + "/user/status/"+ userId, {responseType: "text"});
-  }
-
-  existUsername(userName: String): Observable<any>{
-    return this.http.get(this.url+ "/users_exist/" + userName, {})
   }
 }

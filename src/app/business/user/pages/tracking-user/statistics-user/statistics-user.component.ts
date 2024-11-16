@@ -41,7 +41,7 @@ const centerTextPlugin = {
   styleUrls: ['./statistics-user.component.css']
 })
 export class StatisticsUserComponent implements OnInit {
-  userId = 6;
+  userId = 10;
   avgCorrectAnswers: number;
   totalPoints: number;
   avgPoints: number;

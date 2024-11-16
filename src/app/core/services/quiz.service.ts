@@ -27,8 +27,6 @@ export class QuizService {
     return this.http.get(this.url + "/quizzes/"+ userId);
   }
 
-
-
   getQuizById(quizId: number): Observable<any>{
     return this.http.get(this.url + "/quiz/id/"+ quizId, {});
   }

@@ -15,6 +15,15 @@ export class RatingService {
     return this.http.get(this.url + "/ratingsContentByScore");
   }
 
+
+  avgRatingByContent(contentId: number): Observable<any>{
+    return this.http.get(this.url + "/avgRatingByContent/"+ contentId);
+  }
+
+  isRated(contentId: number, userId: number): Observable<any>{
+    return this.http.get(this.url + "/ratingByContentAndUser/" + contentId + "/" + userId, {})
+  }
+
   listRatingByUser(userId: number): Observable<any>{
     return this.http.get(this.url + "/ratingsByUser/" + userId);
   }

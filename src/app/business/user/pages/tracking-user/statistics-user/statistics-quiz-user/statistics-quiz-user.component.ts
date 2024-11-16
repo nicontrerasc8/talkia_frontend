@@ -3,15 +3,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import { RouterLink, RouterOutlet } from "@angular/router";
 import { MatCard, MatCardContent, MatCardImage } from '@angular/material/card';
-
 import { Chart, registerables } from 'chart.js';
 import {NavUserComponent} from '../../../shared/nav-user/nav-user.component';
 import {Quiz} from '../../../../../../core/model/quiz';
-import {UsersService} from '../../../../../../core/services/users.service';
 import {QuizzesQuestionService} from '../../../../../../core/services/quizzes-question.service';
-import {QuizUserService} from '../../../../../../core/services/quiz-user.service';
-import {AnswerService} from '../../../../../../core/services/answer.service';
 import {QuizzesQuestionQuiz} from '../../../../../../core/model/quizzes-question-quiz';
+import {QuizService} from '../../../../../../core/services/quiz.service';
 
 Chart.register(...registerables);
 
@@ -57,7 +54,7 @@ const centerTextPlugin = {
 })
 export class StatisticsQuizUserComponent implements OnInit {
   chart: any;
-  userId = 6;
+  userId = 10;
   questionDetails: QuizzesQuestionQuiz[] = [];
   quizzes: Quiz[] = [];
   quizId: number;
@@ -65,7 +62,7 @@ export class StatisticsQuizUserComponent implements OnInit {
   countCorrectAnswers: number;
   countSecondAttempt: number;
   qqService: QuizzesQuestionService = inject(QuizzesQuestionService);
-  quizService: QuizUserService = inject(QuizUserService);
+  quizService: QuizService = inject(QuizService);
   totalPoints: number;
 
   ngOnInit() {

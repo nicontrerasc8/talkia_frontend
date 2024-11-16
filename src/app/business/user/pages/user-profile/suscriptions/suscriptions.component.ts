@@ -6,7 +6,6 @@ import {RouterLink, RouterOutlet} from '@angular/router';
 import {SuscriptionsHistoryService} from '../../../../../core/services/suscriptions-history.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {NgForOf, NgIf} from '@angular/common';
-import {DialogPayComponent} from '../../../../welcome/pages/register/pages/dialog-pay/dialog-pay.component';
 import {MatDialog} from '@angular/material/dialog';
 import {SuscriptionDialogComponent} from './suscription-dialog/suscription-dialog.component';
 import {MatFormField} from '@angular/material/form-field';

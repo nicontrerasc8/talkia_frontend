@@ -31,6 +31,10 @@ export class QuizzesQuestionService {
     return this.http.get(this.url + "/quizzesQuestion/getSecondAttemptCorrect/" + quizId , {});
   }
 
+  getTotalPoints(userId: number): Observable<any>{
+    return this.http.get(this.url + "/quizzesQuestion/getTotalPoints/" + userId, {});
+  }
+
   getCorrectAnswerCount(quizId: number):Observable<any>{
     return this.http.get(this.url + "/quizzesQuestion/getCorrectAnswersCount/" + quizId , {});
   }
@@ -43,12 +47,8 @@ export class QuizzesQuestionService {
     return this.http.get(this.url + "/quizzesQuestion/listQuizzesQuestionByQuizId/" + quizId, {});
   }
 
-  getAvgCorrectPerUser(userId: number): Observable<any>{
-    return this.http.get(this.url + "/quizzesQuestion/correctAnswerPercentage/" + userId, {});
-  }
-
   getAvgPointsPerUser(userId: number): Observable<any>{
-    return this.http.get(this.url + "/quizzesQuestion/getAvgCorrectAnswers/" + userId, {});
+    return this.http.get(this.url + "/quizzesQuestion/avgPointsByUser/" + userId, {});
   }
 
   getCompletedPerUser(userId: number): Observable<any>{
@@ -56,7 +56,7 @@ export class QuizzesQuestionService {
   }
 
   getPercentagePerUser(userId: number): Observable<any>{
-    return this.http.get(this.url + "/quizzesQuestion/getPercentageCorrectAnswersUser/" + userId, {});
+    return this.http.get(this.url + "/quizzesQuestion/correctAnswerPercentage/" + userId, {});
   }
 
 }

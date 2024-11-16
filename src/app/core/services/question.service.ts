@@ -14,6 +14,7 @@ export class QuestionService {
   private listaCambio: Subject<Question[]> = new Subject<Question[]>();
 
   constructor() { }
+
   list():Observable<any>{
     return this.http.get(this.url + "/questions");
   }
