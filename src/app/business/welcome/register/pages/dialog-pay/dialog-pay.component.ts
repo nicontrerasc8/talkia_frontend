@@ -9,7 +9,7 @@ import {
 import {MatButton} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInput} from '@angular/material/input';
-import {DialogRegisterService} from '../../../../../core/services/dialog-register.service';
+import {DialogRegisterService} from '../../../../../../core/services/dialog-register.service';
 
 @Component({
   selector: 'app-dialog-pay',
@@ -35,6 +35,5 @@ export class DialogPayComponent {
 
   onAccept(): void {
     this.dialogService.onAccept.emit();
-
   }
 }
