@@ -18,13 +18,14 @@ import {DialogPayComponent} from './pages/dialog-pay/dialog-pay.component';
 import {
   MatDialog, MatDialogModule
 } from '@angular/material/dialog';
-import {Suscription} from '../../../../core/model/suscription';
-import {PaymentType} from '../../../../core/model/payment-type';
-import {SuscriptionsHistoryService} from '../../../../core/services/suscriptions-history.service';
-import {DialogRegisterService} from '../../../../core/services/dialog-register.service';
 import {Observable} from 'rxjs';
 import {NgIf} from '@angular/common';
-import {CustomDialogComponent} from '../shared/custom-dialog/custom-dialog.component';
+import {User} from '../../../core/model/user';
+import {UsersService} from '../../../core/services/users.service';
+import {SuscriptionsHistoryService} from '../../../core/services/suscriptions-history.service';
+import {DialogRegisterService} from '../../../core/services/dialog-register.service';
+import {Suscription} from '../../../core/model/suscription';
+import {PaymentType} from '../../../core/model/payment-type';
 
 @Component({
   selector: 'app-register',

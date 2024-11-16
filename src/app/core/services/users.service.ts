@@ -60,4 +60,8 @@ export class UsersService {
   getStatusByUser(userId: number): Observable<any>{
     return this.http.get(this.url + "/user/status/"+ userId, {responseType: "text"});
   }
+
+  existUsername(userName: String): Observable<any>{
+    return this.http.get(this.url+ "/users_exist/" + userName, {})
+  }
 }
