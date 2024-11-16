@@ -7,8 +7,6 @@ import UsersComponent from './home/pages/users/users.component';
 import { PaymentAdminComponent } from './home/pages/payment-admin/payment-admin.component';
 import { LoginComponent } from './login/login.component';
 
-
-
 export const routes: Routes = [
   {
     path: '', component: LandingComponent
