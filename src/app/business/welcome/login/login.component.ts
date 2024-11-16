@@ -46,9 +46,9 @@ export class LoginComponent implements OnInit {
 
 
     // Aquí puedes implementar la lógica de autenticación
-    if (this.loginForm.value.usuario === 'user' && this.loginForm.value.contrasena === 'user123') {
+    if (this.loginForm.value.usuario === 'admin' && this.loginForm.value.contrasena === 'admin123') {
       // Redirigir a otra ruta, por ejemplo, dashboard
-      this.router.navigate(['/user']);
+      this.router.navigate(['/admin']);
     } else {
       alert('Usuario o contraseña incorrecta');
     }
