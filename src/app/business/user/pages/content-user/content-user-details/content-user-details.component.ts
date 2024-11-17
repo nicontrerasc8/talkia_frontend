@@ -49,6 +49,7 @@ export class ContentUserDetailsComponent implements OnInit {
   userId: number = 6;
   id: number = 0;
   hasRated: boolean = false;
+  
 
   ngOnInit() {
     this.route.params.subscribe((data: Params) => {
