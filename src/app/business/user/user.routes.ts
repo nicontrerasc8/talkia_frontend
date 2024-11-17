@@ -3,7 +3,6 @@ import {UserComponent} from './user.component';
 import {UserContent} from '../../core/model/user-content';
 import {QuizzesUserComponent} from './pages/quizzes-user/quizzes-user.component';
 import {UserProfileComponent} from './pages/user-profile/user-profile.component';
-import {UserSettingsComponent} from './pages/user-settings/user-settings.component';
 import {ContentUserComponent} from './pages/content-user/content-user.component';
 import {NgModule} from '@angular/core';
 import {routes} from '../../app.routes';

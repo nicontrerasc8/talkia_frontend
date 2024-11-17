@@ -12,20 +12,21 @@ import {MatInput, MatInputModule} from '@angular/material/input';
 import {Form, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {ActivatedRoute, Params, Router, RouterOutlet} from '@angular/router';
+import {UsersService} from '../../../../core/services/users.service';
+import {User} from '../../../../core/model/user';
 import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from '@angular/material/stepper';
 import {Dialog} from '@angular/cdk/dialog';
 import {DialogPayComponent} from './pages/dialog-pay/dialog-pay.component';
 import {
   MatDialog, MatDialogModule
 } from '@angular/material/dialog';
+import {Suscription} from '../../../../core/model/suscription';
+import {PaymentType} from '../../../../core/model/payment-type';
+import {SuscriptionsHistoryService} from '../../../../core/services/suscriptions-history.service';
+import {DialogRegisterService} from '../../../../core/services/dialog-register.service';
 import {Observable} from 'rxjs';
 import {NgIf} from '@angular/common';
-import {User} from '../../../core/model/user';
-import {UsersService} from '../../../core/services/users.service';
-import {SuscriptionsHistoryService} from '../../../core/services/suscriptions-history.service';
-import {DialogRegisterService} from '../../../core/services/dialog-register.service';
-import {Suscription} from '../../../core/model/suscription';
-import {PaymentType} from '../../../core/model/payment-type';
+import {CustomDialogComponent} from '../shared/custom-dialog/custom-dialog.component';
 
 @Component({
   selector: 'app-register',
@@ -70,6 +71,8 @@ export class RegisterComponent implements OnInit {
   formTitle: string[] = ['Registrarte', 'Seleccionar Plan', 'Seleccionar método de pago'];
   cont: number = 0;
   dialog = inject(MatDialog);
+  isModalVisible: boolean = false;
+  modalData: { type?: string; src?: string } = {};
 
   constructor() {
     this.datosForm = this.fb.group({
@@ -92,19 +95,25 @@ export class RegisterComponent implements OnInit {
   }
 
   avanzarPaso(stepper: any, validate: boolean) {
+
     const dateOfBirth = this.datosForm.get('dateOfBirth')?.value;
     const userName = this.datosForm.get('userName')?.value;
 
-    if (validate) {
+    if(validate){
       if (this.datosForm.valid) {
-        // Validación de userName
+        //Validación de userName
         this.userService.existUsername(userName).subscribe((exists: boolean) => {
-          if (exists) {
-            alert('Lo sentimos, el nombre de usuario se encuentra registrado');
-          } else {
-            // Validación de fecha
-            if (dateOfBirth && new Date(dateOfBirth) > new Date()) {
-              alert('La fecha de nacimiento no puede ser mayor a la fecha actual');
+          if(exists){
+            this.dialog.open(CustomDialogComponent,{
+              data: { message: 'Lo sentimos, el nombre de usuario se encuentra registrado'}
+            });
+          }
+          else{
+            //Validación de fecha
+            if(dateOfBirth && new Date(dateOfBirth) > new Date()){
+              this.dialog.open(CustomDialogComponent, {
+                data: { message: 'La fecha de nacimiento no puede ser mayor a la fecha actual' },
+              });
             } else {
               stepper.next();
               if (this.cont < this.formTitle.length - 1) {
@@ -114,18 +123,24 @@ export class RegisterComponent implements OnInit {
           }
         });
       } else {
-        // Mensaje de correo en caso de error
-        if (this.datosForm.get('email')?.hasError('email')) {
-          alert('Lo sentimos, el correo ingresado no es válido');
+        //Mensaje de correo en caso de error
+        if(this.datosForm.get('email')?.hasError('email')){
+          this.dialog.open(CustomDialogComponent,{
+            data: { message: 'Lo sentimos, el correo ingresado no es válido'}
+          })
         } else {
-          alert('Por favor, completa todos los campos requeridos.');
+          this.dialog.open(CustomDialogComponent,{
+            data: { message: 'Por favor, completa todos los campos requeridos.' }
+          })
         }
       }
     } else {
       if (this.datosForm.valid) {
         stepper.next();
       } else {
-        alert('Por favor, completa todos los campos requeridos.');
+        this.dialog.open(CustomDialogComponent,{
+          data: { message: 'Por favor, completa todos los campos requeridos.' }
+        });
       }
     }
   }
@@ -197,12 +212,6 @@ export class RegisterComponent implements OnInit {
               console.log("Suscription history añadida");
               console.log(response);
               alert(response);
-              // Mostrar la lista de usuarios actualizada en la consola
-              this.userService.list().subscribe((data: any) => {
-                console.log("Lista actualizada de usuarios:", data);
-                this.userService.setList(data);
-              });
-
               this.router.navigate(['/login']);
 
             });
