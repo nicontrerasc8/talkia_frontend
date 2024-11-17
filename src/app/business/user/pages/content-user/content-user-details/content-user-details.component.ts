@@ -48,8 +48,9 @@ export class ContentUserDetailsComponent implements OnInit {
   avgRate: number = 0.0;
   userId: number = 6;
   id: number = 0;
-  hasRated: boolean = false;
   
+  hasRated: boolean = false;
+
 
 
   ngOnInit() {
