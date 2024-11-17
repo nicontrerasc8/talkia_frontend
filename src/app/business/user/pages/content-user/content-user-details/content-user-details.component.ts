@@ -51,6 +51,7 @@ export class ContentUserDetailsComponent implements OnInit {
   hasRated: boolean = false;
   
 
+
   ngOnInit() {
     this.route.params.subscribe((data: Params) => {
       console.log("ngOnInit de ContentUserDetailsComponent");
