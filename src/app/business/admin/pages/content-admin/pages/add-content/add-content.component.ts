@@ -9,9 +9,9 @@ import {MatSelect} from '@angular/material/select';
 import {NgForOf} from '@angular/common';
 import {LevelService} from '../../../../../../core/services/level.service';
 import {Content} from '../../../../../../core/model/content';
+import {ContentAdminService} from '../../../../../../core/services/content-admin.service';
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {MatCheckbox} from '@angular/material/checkbox';
-import {ContentService} from '../../../../../../core/services/content.service';
 
 @Component({
   selector: 'app-add-content',
@@ -45,7 +45,7 @@ export class AddContentComponent implements OnInit {
   themes: string[] = ['Grammar', 'Listening', 'Reading'];
 
   public idNivelSeleccionado: number = 0;
-  contentService:ContentService=inject(ContentService);
+  contentService:ContentAdminService=inject(ContentAdminService);
   edicion: boolean = false;
   fb: FormBuilder = inject(FormBuilder);
   router: Router = inject(Router);

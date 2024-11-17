@@ -1,6 +1,4 @@
 import {Routes } from '@angular/router';
-import {LandingComponent} from './business/landing/landing.component';
-import {LoginComponent} from './business/welcome/login/login.component';
 
 export const routes: Routes = [
   {

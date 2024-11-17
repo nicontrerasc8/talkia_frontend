@@ -16,8 +16,8 @@ import {MatButton} from '@angular/material/button';
 import {ContentAdminService} from '../../../../core/services/content-admin.service';
 import {Content} from '../../../../core/model/content';
 import {NavAdminComponent} from '../../shared/nav-admin/nav-admin.component';
-import {DeleteContentComponent} from './pages/delete-content/delete-content.component';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {DeleteContentComponent} from './pages/delete-content/delete-content.component';
 
 @Component({
   selector: 'app-content-admin',
