@@ -116,6 +116,7 @@ export default class UsersComponent {
         },
         error: (error) => console.log("Error en consulta"),
       });
+
     }
     else{
       this.loadLista();
