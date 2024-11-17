@@ -72,4 +72,14 @@ export class ContentService {
     return this.http.get(this.url + "/content_fechaAsc");
 
   }
+  insert(content:Content): Observable<any>{
+    return this.http.post(this.url + "/content", content);
+  }
+
+  update(content: Content): Observable<any>{
+    return this.http.put(this.url + "/content", content);
+  }
+  delete(id: number): Observable<any>{
+    return this.http.delete(this.url + "/content/"+id);
+  }
 }
