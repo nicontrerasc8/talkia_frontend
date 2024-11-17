@@ -1,7 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {Payment} from '../../../../../core/model/payment';
-import {PaymentAdminService} from '../../../../../core/services/payment-admin.service';
 import {MatSort} from '@angular/material/sort';
 import {
   MatCell,
@@ -15,6 +14,7 @@ import {
 import {TotalAmountSubtype} from '../../../../../core/model/total-amount-subtype';
 import {CountHistoriesObject} from '../../../../../core/model/count-histories-object';
 import {NavAdminComponent} from '../../../shared/nav-admin/nav-admin.component';
+import {PaymentService} from '../../../../../core/services/payment.service';
 
 @Component({
   selector: 'app-reports',
@@ -39,7 +39,7 @@ import {NavAdminComponent} from '../../../shared/nav-admin/nav-admin.component';
   styleUrl: './reports.component.css'
 })
 export class ReportsComponent {
-  paymentService: PaymentAdminService = inject(PaymentAdminService);
+  paymentService: PaymentService = inject(PaymentService);
   displayedColumns1: string[] = ['suscriptionType', 'countHistories','totalAmount'];
   displayedColumns2: string[] = ['varType', 'count'];
   dataSus: MatTableDataSource<TotalAmountSubtype> = new MatTableDataSource<TotalAmountSubtype>();

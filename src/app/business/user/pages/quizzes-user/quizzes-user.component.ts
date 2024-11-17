@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {NavUserComponent} from '../shared/nav-user/nav-user.component';
-import {QuizUserService} from '../../../../core/services/quiz.service';
+import {QuizService} from '../../../../core/services/quiz.service';
 import {Quiz} from '../../../../core/model/quiz';
 import {DataQuizzesSharingService} from '../../../../core/services/data-quizzes-sharing.service';
 import {LoadingScreenComponent} from '../shared/loading-screen/loading-screen.component';
@@ -22,7 +22,7 @@ import {NgIf} from '@angular/common';
 })
 export class QuizzesUserComponent {
 
-  userQuizService: QuizUserService = inject(QuizUserService)
+  userQuizService: QuizService = inject(QuizService)
   router: Router = inject(Router);
   loading = false;
   dataSharing: DataQuizzesSharingService = inject(DataQuizzesSharingService);

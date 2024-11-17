@@ -14,7 +14,6 @@ import {MatPaginator} from '@angular/material/paginator';
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {AsyncPipe, DatePipe, NgIf} from '@angular/common';
 import {Payment} from '../../../../core/model/payment';
-import {PaymentAdminService} from '../../../../core/services/payment-admin.service';
 import {NavAdminComponent} from '../../shared/nav-admin/nav-admin.component';
 import {SuscriptionsHistory} from '../../../../core/model/suscriptions.history';
 import {SuscriptionsHistoryService} from '../../../../core/services/suscriptions-history.service';
