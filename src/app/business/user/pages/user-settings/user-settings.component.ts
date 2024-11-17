@@ -25,8 +25,6 @@ export class UserSettingsComponent {
         console.log("Cuenta eliminada correctamente");
         alert("Cuenta eliminada correctamente");
         this.router.navigate(['/welcome']);
-
-        // Aquí puedes redirigir al usuario o realizar otras acciones
       },
       error: (err) => {
         console.error("Error al eliminar la cuenta:", err);
@@ -37,8 +35,5 @@ export class UserSettingsComponent {
   LogOut(): void {
     alert("Está cerrando sesión");
     this.router.navigate(['/login']);
-
   }
-
-
 }
