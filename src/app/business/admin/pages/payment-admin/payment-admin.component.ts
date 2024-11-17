@@ -113,6 +113,8 @@ export class PaymentAdminComponent implements OnInit, AfterViewInit{
     }
   }
 
+
+
   onPaymentTypeChange(event: Event){
     const inputElement = event.target as HTMLInputElement;
     const type = inputElement.value;
