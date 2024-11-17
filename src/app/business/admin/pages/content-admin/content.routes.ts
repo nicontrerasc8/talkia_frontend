@@ -1,6 +1,4 @@
 import {Routes} from '@angular/router';
-import {AddQuestionComponent} from '../quizzes-menu-admin/add-question/add-question.component';
-import UsersComponent from '../users/users.component';
 import {AddContentComponent} from './pages/add-content/add-content.component';
 import {ContentAdminComponent} from './content-admin.component';
 import {EditContentComponent} from './pages/edit-content/edit-content.component';
