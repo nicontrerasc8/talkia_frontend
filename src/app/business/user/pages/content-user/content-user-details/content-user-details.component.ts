@@ -46,6 +46,8 @@ export class ContentUserDetailsComponent implements OnInit {
   ratingService: RatingService = inject(RatingService);
   currentRating: number = 0;
   avgRate: number = 0.0;
+
+  
   userId: number = 6;
   id: number = 0;
   
