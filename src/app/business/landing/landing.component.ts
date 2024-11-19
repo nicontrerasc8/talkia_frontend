@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {RouterLink, RouterOutlet} from '@angular/router';
+import {MatGridList, MatGridTile} from '@angular/material/grid-list';
 
 
 @Component({
@@ -7,7 +8,9 @@ import {RouterLink, RouterOutlet} from '@angular/router';
   standalone: true,
   imports: [
     RouterOutlet,
-    RouterLink
+    RouterLink,
+    MatGridTile,
+    MatGridList
   ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
