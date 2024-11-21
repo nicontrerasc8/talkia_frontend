@@ -57,20 +57,20 @@ export class ContentUserDetailsComponent implements OnInit {
     this.route.params.subscribe((data: Params) => {
       console.log("ngOnInit de ContentUserDetailsComponent");
       console.log(data);
-      this.id = data['id']; // capturando el id del listado
+      this.id = data['id'];
       console.log(this.id);
       this.loadLista();
-      this.loadRatings(); // Cargar las reseñas al inicializar el componente
+      this.loadRatings();
 
     });
   }
 
   private loadLista() {
     this.contentService.getContentById(this.id).subscribe({
-      next: (data: any) => { // Cambiamos el tipo a `Content[]` porque es un array
+      next: (data: any) => {
         if (data && data.length > 0) {
-          this.content = data[0];  // Asignamos solo el primer elemento del array
-          console.log('Data recibida:', this.content);  // Mostrar el contenido del primer elemento en la consola
+          this.content = data[0];
+          console.log('Data recibida:', this.content);
         } else {
           console.log("No se encontraron datos para el contenido con ID:", this.id);
         }
@@ -81,7 +81,7 @@ export class ContentUserDetailsComponent implements OnInit {
   }
 
   private loadRatings() {
-    // Llamar al metodo listRatingByContent del RatingService y mostrar los resultados
+
     this.ratingService.listRatingByContent(this.id).subscribe({
       next: (ratings) => {
         console.log('Ratings recibidos:', ratings); // Mostrar los ratings en la consola
@@ -98,11 +98,10 @@ export class ContentUserDetailsComponent implements OnInit {
     });
 
   }
-//revisar si rateo una vez y promedio rating
+
 
 
   addRating() {
-    // Verificar si el usuario ya ha calificado
     this.ratingService.isRated(this.id,this.userId).subscribe({
       next: (data) => {
         this.hasRated = data;
