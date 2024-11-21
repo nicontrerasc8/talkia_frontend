@@ -36,5 +36,4 @@ export class RatingService {
     return this.http.post(this.url + "/rating/" + contentId + "/" + userId + "/" + score, score);
   }
 
-
 }

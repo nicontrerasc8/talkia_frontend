@@ -1,9 +1,7 @@
 import {ActivatedRoute, Params, Router, RouterLink, RouterOutlet} from '@angular/router';
 import { Content } from '../../../../../core/model/content';
 import { RatingService } from '../../../../../core/services/rating.service';
-import { ContentAdminService } from '../../../../../core/services/content-admin.service';
 import { Component, inject, OnInit } from '@angular/core';
-import { ContentUserService } from '../../../../../core/services/content-user.service';
 import { StarRatingComponent } from './star-rating/star-rating.component';
 import { NgForOf, NgIf } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
@@ -42,15 +40,15 @@ export class ContentUserDetailsComponent implements OnInit {
   reviews: any[] = []; // Propiedad para almacenar las reseñas
   router: Router = inject(Router);
   route: ActivatedRoute = inject(ActivatedRoute);
-  contentAdminService: ContentAdminService = inject(ContentService);
+  contentService: ContentService = inject(ContentService);
   ratingService: RatingService = inject(RatingService);
   currentRating: number = 0;
   avgRate: number = 0.0;
 
-  
+
   userId: number = 6;
   id: number = 0;
-  
+
   hasRated: boolean = false;
 
 
@@ -68,7 +66,7 @@ export class ContentUserDetailsComponent implements OnInit {
   }
 
   private loadLista() {
-    this.contentUserService.getContentById(this.id).subscribe({
+    this.contentService.getContentById(this.id).subscribe({
       next: (data: any) => { // Cambiamos el tipo a `Content[]` porque es un array
         if (data && data.length > 0) {
           this.content = data[0];  // Asignamos solo el primer elemento del array
