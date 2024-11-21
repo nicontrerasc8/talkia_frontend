@@ -109,11 +109,10 @@ export class ContentUserDetailsComponent implements OnInit {
         console.log(this.hasRated);
         if (this.hasRated) {
           console.log('El usuario ya ha calificado este contenido.');
-          return; // Salir de la función sin hacer nada
+          return;
         }
 
         console.log('Calificación agregada:', this.currentRating);
-        // Aquí se ejecuta el servicio para guardar la calificación
         this.ratingService.addRating(this.id, this.userId, this.currentRating).subscribe({
           next: (response) => {
             console.log('Calificación guardada:', response);
