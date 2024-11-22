@@ -4,13 +4,13 @@ import {NgForOf, NgIf} from '@angular/common';
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Params, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {Level} from '../../../../../../../core/model/level';
+import {QuestionAdminService} from '../../../../../../../core/services/question-admin.service';
 import {LevelService} from '../../../../../../../core/services/level.service';
 import {AnswerService} from '../../../../../../../core/services/answer.service';
 import {Question} from '../../../../../../../core/model/question';
 import {Content} from '../../../../../../../core/model/content';
 import {forkJoin, Observable} from 'rxjs';
 import { Answer } from '../../../../../../../core/model/answer';
-import {QuestionService} from '../../../../../../../core/services/question.service';
 
 @Component({
   selector: 'app-edit-question',
@@ -33,7 +33,7 @@ export class EditQuestionComponent implements OnInit {
   level: Level = new Level();
   fb = inject(FormBuilder);
   router: Router = inject(Router);
-  questionAdminService: QuestionService = inject(QuestionService);
+  questionAdminService: QuestionAdminService = inject(QuestionAdminService);
   levelService: LevelService = inject(LevelService);
   answerService: AnswerService = inject(AnswerService);
   route: ActivatedRoute = inject(ActivatedRoute);

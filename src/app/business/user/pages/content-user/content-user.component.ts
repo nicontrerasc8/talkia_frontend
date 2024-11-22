@@ -16,15 +16,10 @@ import {CommonModule, DatePipe} from '@angular/common';
 import {NavAdminComponent} from '../../../admin/shared/nav-admin/nav-admin.component';
 import {NavUserComponent} from '../shared/nav-user/nav-user.component';
 import {Content} from '../../../../core/model/content';
-import {ContentUserService} from '../../../../core/services/content-user.service';
-import {Observable} from 'rxjs';
-import {data} from 'autoprefixer';
 import {RatingService} from '../../../../core/services/rating.service';
 import {ContentHistoryService} from '../../../../core/services/content-history.service';
 import {UserContent} from '../../../../core/model/user-content';
-import {UsersService} from '../../../../core/services/users.service';
-import {User} from '../../../../core/model/user';
-
+import {ContentUserService} from '../../../../core/services/content-user.service';
 
 @Component({
   selector: 'app-content-user',
