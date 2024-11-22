@@ -1,14 +1,15 @@
 import {ActivatedRoute, Params, Router, RouterLink, RouterOutlet} from '@angular/router';
 import { Content } from '../../../../../core/model/content';
 import { RatingService } from '../../../../../core/services/rating.service';
+import { ContentAdminService } from '../../../../../core/services/content-admin.service';
 import { Component, inject, OnInit } from '@angular/core';
+import { ContentUserService } from '../../../../../core/services/content-user.service';
 import { StarRatingComponent } from './star-rating/star-rating.component';
 import { NgForOf, NgIf } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatCard, MatCardActions, MatCardContent, MatCardFooter, MatCardHeader, MatCardImage, MatCardModule, MatCardTitle } from '@angular/material/card';
 import { NavUserComponent } from '../../shared/nav-user/nav-user.component';
-import { ContentService } from '../../../../../core/services/content.service';
 
 @Component({
   selector: 'app-content-user-details',
@@ -40,33 +41,30 @@ export class ContentUserDetailsComponent implements OnInit {
   reviews: any[] = []; // Propiedad para almacenar las reseñas
   router: Router = inject(Router);
   route: ActivatedRoute = inject(ActivatedRoute);
-  contentService: ContentService = inject(ContentService);
+  contentUserService: ContentUserService = inject(ContentUserService);
+  contentAdminService: ContentAdminService = inject(ContentAdminService);
   ratingService: RatingService = inject(RatingService);
   currentRating: number = 0;
   avgRate: number = 0.0;
-
-
-  userId: number = 6;
+  //Identificar usuario
+  userId: number = parseInt(localStorage.getItem('userId') || '0', 10);
   id: number = 0;
-
   hasRated: boolean = false;
-
-
 
   ngOnInit() {
     this.route.params.subscribe((data: Params) => {
       console.log("ngOnInit de ContentUserDetailsComponent");
       console.log(data);
-      this.id = data['id'];
+      this.id = data['id']; // capturando el id del listado
       console.log(this.id);
       this.loadLista();
-      this.loadRatings();
+      this.loadRatings(); // Cargar las reseñas al inicializar el componente
 
     });
   }
 
   private loadLista() {
-    this.contentService.getContentById(this.id).subscribe({
+    this.contentUserService.getContentById(this.id).subscribe({
       next: (data: any) => {
         if (data && data.length > 0) {
           this.content = data[0];
@@ -81,14 +79,13 @@ export class ContentUserDetailsComponent implements OnInit {
   }
 
   private loadRatings() {
-
     this.ratingService.listRatingByContent(this.id).subscribe({
       next: (ratings) => {
         console.log('Ratings recibidos:', ratings); // Mostrar los ratings en la consola
         this.reviews = ratings; // Guardar los ratings en la propiedad `reviews`
         this.ratingService.avgRatingByContent(this.id).subscribe({
           next: (data: any) => {
-            this.avgRate = data;;
+            this.avgRate = data;
             console.log(this.avgRate);
           }
         })
@@ -112,6 +109,7 @@ export class ContentUserDetailsComponent implements OnInit {
         }
 
         console.log('Calificación agregada:', this.currentRating);
+        // Aquí se ejecuta el servicio para guardar la calificación
         this.ratingService.addRating(this.id, this.userId, this.currentRating).subscribe({
           next: (response) => {
             console.log('Calificación guardada:', response);

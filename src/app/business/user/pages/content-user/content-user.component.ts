@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, ElementRef, inject, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {
   MatCell,
   MatCellDef,
@@ -13,15 +13,17 @@ import {MatButton} from '@angular/material/button';
 import {MatPaginator} from '@angular/material/paginator';
 import {RouterLink, RouterOutlet} from '@angular/router';
 import {CommonModule, DatePipe} from '@angular/common';
+import {NavAdminComponent} from '../../../admin/shared/nav-admin/nav-admin.component';
 import {NavUserComponent} from '../shared/nav-user/nav-user.component';
 import {Content} from '../../../../core/model/content';
-import {ContentService} from '../../../../core/services/content.service';
+import {ContentUserService} from '../../../../core/services/content-user.service';
 import {Observable} from 'rxjs';
 import {data} from 'autoprefixer';
 import {RatingService} from '../../../../core/services/rating.service';
 import {ContentHistoryService} from '../../../../core/services/content-history.service';
 import {UserContent} from '../../../../core/model/user-content';
-
+import {UsersService} from '../../../../core/services/users.service';
+import {User} from '../../../../core/model/user';
 
 
 @Component({
@@ -46,10 +48,13 @@ import {UserContent} from '../../../../core/model/user-content';
     MatHeaderRowDef,
     CommonModule,
     RouterOutlet,
+    NavAdminComponent,
     NavUserComponent
   ],
   templateUrl: './content-user.component.html',
-  styleUrl: './content-user.component.css'
+  styleUrl: './content-user.component.css',
+  encapsulation: ViewEncapsulation.None, // Desactiva estilos de Material para este componente
+
 })
 export class ContentUserComponent implements OnInit{
   lista: Content[] = [];
@@ -57,11 +62,14 @@ export class ContentUserComponent implements OnInit{
   level: string | undefined;
   type: string | undefined;
   theme: string | undefined;
-  contentService: ContentService = inject(ContentService);
+  contentUserService: ContentUserService = inject(ContentUserService);
   ratingService: RatingService= inject(RatingService);
   userContentService: ContentHistoryService = inject(ContentHistoryService);
   isDateAsc = true;
-  userId = 2;
+  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+
+  //Identificar usuario
+  userId: number = parseInt(localStorage.getItem('userId') || '0', 10);
 
   ngOnInit(): void {
     console.log("Load Lista!");
@@ -69,7 +77,7 @@ export class ContentUserComponent implements OnInit{
   }
 
   private loadLista(): void{
-    this.contentService.list().subscribe({
+    this.contentUserService.list().subscribe({
       next: (data) => {
         this.dataSource.data = data;
         console.log('Data recibida:', data);
@@ -83,9 +91,11 @@ export class ContentUserComponent implements OnInit{
     const inputElement = event.target as HTMLInputElement;
     const contentName = inputElement.value;
 
+    this.onFiltersReset();
+
     if (contentName != '') {
       console.log(contentName);
-      this.contentService.listByTitle(contentName).subscribe({
+      this.contentUserService.listByTitle(contentName).subscribe({
         next: (data) => {
           this.dataSource.data = data;
         },
@@ -96,16 +106,21 @@ export class ContentUserComponent implements OnInit{
       this.loadLista();
     }
   }
+
   onDate() {
+
+    this.clearInput();
+    this.onFiltersReset();
+
     if (this.isDateAsc) {
-      this.contentService.listContentOrderByDateOfPublicationAsc().subscribe({
+      this.contentUserService.listContentOrderByDateOfPublicationAsc().subscribe({
         next: (data) => {
           this.dataSource.data = data;
         },
         error: (error) => console.log("Error en consulta de fecha ascendente", error),
       });
     } else {
-      this.contentService.listContentOrderByDateOfPublicationDesc().subscribe({
+      this.contentUserService.listContentOrderByDateOfPublicationDesc().subscribe({
         next: (data) => {
           this.dataSource.data = data;
         },
@@ -116,6 +131,10 @@ export class ContentUserComponent implements OnInit{
   }
 
   onPopularity() {
+
+    this.clearInput();
+    this.onFiltersReset();
+
     this.ratingService.listContentOrderByScore().subscribe({
       next: (data) => {
         this.dataSource.data = data;
@@ -125,7 +144,11 @@ export class ContentUserComponent implements OnInit{
   }
 
   resetOrder() {
-    this.contentService.list().subscribe({
+
+    this.onFiltersReset();
+    this.clearInput();
+
+    this.contentUserService.list().subscribe({
       next: (data) => {
         this.dataSource.data = data;
       },
@@ -152,12 +175,21 @@ export class ContentUserComponent implements OnInit{
   }
 
   applyFilters(): void{
-    this.contentService.listFilterContent(this.level,this.theme,this.type).subscribe({
+
+    this.clearInput();
+
+    this.contentUserService.listFilterContent(this.level,this.theme,this.type).subscribe({
       next: (data) => {
         this.dataSource.data = data;
       },
       error: (error) => console.log("Error en consulta"),
     });
+  }
+
+  clearInput() {
+    if (this.searchInput) {
+        this.searchInput.nativeElement.value = '';
+    }
   }
 
   onFiltersReset(): void {
@@ -166,6 +198,9 @@ export class ContentUserComponent implements OnInit{
     this.clearRadioButtons('type');
     this.clearRadioButtons('theme');
     this.loadLista();
+    this.level = undefined;
+    this.theme = undefined;
+    this.type = undefined;
   }
 
   onRegister(id: number){
@@ -182,6 +217,4 @@ export class ContentUserComponent implements OnInit{
       input.checked = false;
     });
   }
-
-
 }

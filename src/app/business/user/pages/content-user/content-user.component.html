@@ -3,7 +3,8 @@
   <app-nav-user></app-nav-user>
   <section class="order">
     <div class="order-1">
-      <button [routerLink]="['/user']" class="back-button">&larr;</button>
+      <button [routerLink]="['/user']" class="back-button"><img src="assets/img/arrow.png">
+      </button>
     </div>
     <div class="order-2">
       <button (click)="onDate()">Ordenar por Fecha de Publicación</button>
@@ -16,7 +17,7 @@
     <div class="panel">
       <form>
         <label class="form-title">Biblioteca</label>
-        <input class="search-label" type="text" placeholder="Buscar..." (input)="onSearch($event)">
+        <input #searchInput class="search-label" type="text" placeholder="Buscar..." (input)="onSearch($event)">
 
         <label>Nivel de Dificultad</label>
         <div class="set-label">
