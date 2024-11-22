@@ -1,3 +1,15 @@
+.example-card {
+  margin: 0 auto;
+  width: 500px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/**/
+
 .menu-container {
   display: flex;
   align-items: center;
@@ -25,7 +37,7 @@
 .logo-text {
   margin-top: 0;
   font-size: 36px;
-    color: #E6E0D1;
+  color: #E6E0D1;
 }
 
 .right {

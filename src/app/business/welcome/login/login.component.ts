@@ -1,56 +1,76 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Router, RouterLink, RouterOutlet} from '@angular/router';
-
+import {Component, inject} from '@angular/core';
+import {Router, RouterOutlet} from '@angular/router';
+import { CommonModule } from '@angular/common';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatButton} from "@angular/material/button";
+import {MatCard, MatCardContent, MatCardTitle} from "@angular/material/card";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {MatOption} from "@angular/material/core";
+import {MatSelect} from "@angular/material/select";
+import {RequestDto} from '../../../core/model/request-dto';
+import {LoginService} from '../../../core/services/login.service';
+import {ResponseDto} from '../../../core/model/response-dto';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
   standalone: true,
-    imports: [
-        RouterLink,
-        RouterOutlet
-    ],
-  styleUrls: ['./login.component.css']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
+  imports: [CommonModule, FormsModule, MatButton, MatCard, MatCardContent, MatCardTitle, MatFormField, MatInput, MatLabel, MatOption, MatSelect, ReactiveFormsModule, RouterOutlet]
 })
-export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
-  submitted = false;
+export class LoginComponent {
+  username: string = '';
+  password: string = '';
+  router: Router = inject(Router);
+  loginForm: FormGroup;
+  fb = inject(FormBuilder);
+  loginService: LoginService = inject(LoginService);
 
-
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
-
-
-  ngOnInit(): void {
-    if(localStorage.getItem('token')!=null){
-      localStorage.removeItem('token');
-      console.log('T')
-    }
-    this.loginForm = this.formBuilder.group({
-      usuario: ['', Validators.required],
-      contrasena: ['', Validators.required]
-    });
-
+  constructor() {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    })
   }
 
-
-  // Método de envío del formulario
-  onSubmit() {
-    this.submitted = true;
-
-
-    // Si el formulario es inválido, no procede
-    if (this.loginForm.invalid) {
-      return;
+  ngOnInit() {
+    if(localStorage.getItem('token')!=null){
+      localStorage.removeItem('token');
+      console.log("Token eliminado");
     }
+    this.loadForm()
+  }
 
+  loadForm(): void {
+    console.log("Form");
+  }
 
-    // Aquí puedes implementar la lógica de autenticación
-    if (this.loginForm.value.usuario === 'admin' && this.loginForm.value.contrasena === 'admin123') {
-      // Redirigir a otra ruta, por ejemplo, dashboard
-      this.router.navigate(['/admin']);
+  onSubmit() {
+    if (this.loginForm.valid) {
+      const requestDto: RequestDto = new RequestDto()
+      requestDto.username = this.loginForm.value.username;
+      requestDto.password = this.loginForm.value.password;
+      this.loginService.login(requestDto).subscribe({
+        next: (data: ResponseDto): void => {
+
+          console.log("Rol", data.rol);
+          console.log("userId", data.userId);
+          console.log("levelId", data.levelId);
+          console.log("Login response:", data);
+
+          localStorage.setItem('rol', data.rol);
+          localStorage.setItem('userId',String(data.userId));
+          localStorage.setItem('levelId',String(data.levelId));
+          localStorage.setItem('onTrack', String(1));
+
+          this.router.navigate([data.rol.includes('ADMIN') ? '/admin' : data.rol.includes('USER') ? '/user' : '/login'])
+
+        }
+      })
     } else {
-      alert('Usuario o contraseña incorrecta');
+      alert("Formulario no valido!")
+      console.log("Formulario no valido");
     }
   }
 }
